@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const quizQuestions = [
+  {
+    id: 1,
+    question: "Who is the purple Teletubby with a red handbag?",
+    options: [
+      { id: 'a', text: "Tinky Winky" },
+      { id: 'b', text: "Dipsy" },
+      { id: 'c', text: "Laa-Laa" },
+      { id: 'd', text: "Po" }
+    ],
+    correctAnswer: 'b'
+  },
+  {
+    id: 2,
+    question: "What does the Baby Sun do when it appears?",
+    options: [
+      { id: 'a', text: "Eats custard" },
+      { id: 'b', text: "Starts giggling and makes the windmill turn" },
+      { id: 'c', text: "Dances with the Teletubbies" },
+      { id: 'd', text: "Hides behind a hill" }
+    ],
+    correctAnswer: 'b'
+  },
+  {
+    id: 3,
+    question: "What's Dipsy's favorite color?",
+    options: [
+      { id: 'a', text: "Green" },
+      { id: 'b', text: "Blue" },
+      { id: 'c', text: "Purple" },
+      { id: 'd', text: "Yellow" }
+    ],
+    correctAnswer: 'a'
+  },
+  {
+    id: 4,
+    question: "What does Laa-Laa like to do?",
+    options: [
+      { id: 'a', text: "Sing and dance" },
+      { id: 'b', text: "Play with toys" },
+      { id: 'c', text: "Draw pictures" },
+      { id: 'd', text: "Eat custard" }
+    ],
+    correctAnswer: 'a'
+  },
+  {
+    id: 5,
+    question: "What is Po's favorite food?",
+    options: [
+      { id: 'a', text: "Custard" },
+      { id: 'b', text: "Pancakes" },
+      { id: 'c', text: "Soda" },
+      { id: 'd', text: "Apples" }
+    ],
+    correctAnswer: 'a'
+  }
+];
+
+const answers = [
+  { 
+    questionId: 1, 
+    answer: "Dipsy", 
+    explanation: "Dipsy is the purple Teletubby with a red handbag. She is known for her love of colors and her green hair!" 
+  },
+  { 
+    questionId: 2, 
+    answer: "Starts giggling and makes the windmill turn", 
+    explanation: "The Baby Sun appears and giggles, which makes the windmill in the background turn!" 
+  },
+  { 
+    questionId: 3, 
+    answer: "Green", 
+    explanation: "Dipsy's favorite color is green. She loves everything green, including her hair and clothes." 
+  },
+  { 
+    questionId: 4, 
+    answer: "Sing and dance", 
+    explanation: "Laa-Laa's passion is singing and dancing. She's always singing her favorite song - 'La La La'!" 
+  },
+  { 
+    questionId: 5, 
+    answer: "Custard", 
+    explanation: "Po's favorite food is custard. She loves it so much that she even makes it into a song!" 
+  }
+];
+
+let userAnswers = {};
+let score = 0;
+let showResults = false;
+---
+
+<Layout title="Teletubbies Trivia Quiz: Test Your Tubbies Knowledge!" description="Dive into the whimsical world of Teletubbies with our fun quiz! How well do you know Tinky Winky, Dipsy, Laa-Laa, and Po? Perfect for fans of all ages on Teletubby Troupe Central.">
+  <div class="min-h-screen bg-gradient-to-b from-pastel-yellow to-pastel-pink">
+    <!-- Hero Section -->
+    <div class="relative py-16 md:py-24 bg-gradient-to-r from-primary to-accent bg-opacity-90">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-24 h-24 rounded-full bg-white"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 rounded-full bg-white"></div>
+        <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-white"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-20 h-20 rounded-full bg-white"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="md:w-1/2 mb-8 md:mb-0">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+              Teletubbies Trivia Quiz
+            </h1>
+            <p class="text-xl text-white max-w-lg">
+              Test Your Tubbies Knowledge!
+            </p>
+          </div>
+          <div class="md:w-1/2 flex justify-center">
+            <div class="relative">
+              <div class="w-48 h-48 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                <div class="w-40 h-40 rounded-full bg-white bg-opacity-30 flex items-center justify-center">
+                  <div class="w-32 h-32 rounded-full bg-white bg-opacity-40 flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="text-4xl mb-2">🌈</div>
+                      <p class="text-white font-bold">Tubby Time!</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-pastel-blue flex items-center justify-center">
+                <span class="text-2xl">✨</span>
+              </div>
+              <div class="absolute -bottom-4 -left-4 w-12 h-12 rounded-full bg-pastel-green flex items-center justify-center">
+                <span class="text-xl">🦄</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="py-12 bg-white bg-opacity-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-block bg-white rounded-full p-3 mb-6 shadow-lg">
+            <span class="text-4xl">🌟</span>
+          </div>
+          <h2 class="text-3xl font-bold text-primary mb-4">Welcome to the Teletubbies Trivia Quiz! 🌈</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            <span class="font-bold">Hello, Teletubby fans!</span> Are you ready to tubby up your knowledge of our favorite colorful friends from Teletubbyland? 
+            This playful quiz will test your recall of sunny days, custard pies, and those iconic windmill moments. 
+            Grab your favorite Teletubby plush and let's get started! 🎉
+          </p>
+          <div class="bg-pastel-yellow rounded-xl p-6 shadow-md">
+            <p class="text-primary font-bold text-lg">
+              Answer the questions below, and check the <span class="underline">answers section</span> at the end to see how you scored. 
+              No peeking! 😊
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div class="py-12">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="p-6 md:p-8">
+              <h3 class="text-2xl font-bold text-primary mb-6">Questions</h3>
+              
+              <form id="quizForm" class="space-y-8">
+                {quizQuestions.map((question) => (
+                  <div class="border-b border-pastel-gray pb-6 last:border-0">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">
+                      Question {question.id}: {question.question}
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {question.options.map((option) => (
+                        <label class="flex items-center p-4 bg-pastel-light rounded-lg cursor-pointer hover:bg-pastel-blue hover:bg-opacity-50 transition-all duration-200 border border-pastel-gray">
+                          <input 
+                            type="radio" 
+                            name={`question-${question.id}`} 
+                            value={option.id}
+                            class="mr-3 h-5 w-5 text-primary focus:ring-primary"
+                            onChange={(e) => {
+                              userAnswers[question.id] = e.target.value;
+                            }}
+                          />
+                          <span class="text-gray-700">{option.text}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                
+                <div class="text-center pt-4">
+                  <button 
+                    type="button" 
+                    class="bg-gradient-to-r from-primary to-accent text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                    onClick={() => {
+                      // Calculate score
+                      score = 0;
+                      quizQuestions.forEach(question => {
+                        if (userAnswers[question.id] === question.correctAnswer) {
+                          score++;
+                        }
+                      });
+                      showResults = true;
+                    }}
+                  >
+                    Check My Answers! 🎉
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    {showResults && (
+      <div class="py-12 bg-gradient-to-br from-pastel-blue to-pastel-green">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+              <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-2">Quiz Results</h2>
+                <div class="inline-block bg-gradient-to-r from-primary to-accent text-white rounded-full px-6 py-3 text-xl font-bold">
+                  You scored {score} out of {quizQuestions.length}!
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {quizQuestions.map((question) => {
+                  const userAnswer = userAnswers[question.id];
+                  const isCorrect = userAnswer === question.correctAnswer;
+                  const correctAnswer = answers.find(a => a.questionId === question.id);
+                  
+                  return (
+                    <div class={`p-6 rounded-xl border-l-4 ${isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'}`}>
+                      <h3 class="font-bold text-lg mb-2">
+                        Question {question.id}: {question.question}
+                      </h3>
+                      <div class="mb-3">
+                        <p class="font-semibold">
+                          Your answer: 
+                          <span class={isCorrect ? 'text-green-600' : 'text-red-600'}>
+                            {userAnswer ? question.options.find(o => o.id === userAnswer)?.text : 'No answer'}
+                          </span>
+                        </p>
+                        <p class="font-semibold">
+                          Correct answer: 
+                          <span class="text-green-600">
+                            {question.options.find(o => o.id === question.correctAnswer)?.text}
+                          </span>
+                        </p>
+                      </div>
+                      <p class="text-gray-700 italic">
+                        {correctAnswer.explanation}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div class="mt-8 text-center">
+                <button 
+                  class="bg-gradient-to-r from-primary to-accent text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl"
+                  onClick={() => {
+                    // Reset quiz
+                    userAnswers = {};
+                    score = 0;
+                    showResults = false;
+                    document.getElementById('quizForm').reset();
+                  }}
+                >
+                  Try Again! 🔄
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Teletubby Friends Section -->
+    <div class="py-16 bg-gradient-to-b from-white to-pastel-yellow">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-primary mb-12">Meet Our Teletubby Friends!</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+            <div class="w-24 h-24 mx-auto rounded-full bg-purple-200 mb-4 flex items-center justify-center">
+              <span class="text-4xl">🦄</span>
+            </div>
+            <h3 class="text-xl font-bold text-purple-600 mb-2">Tinky Winky</h3>
+            <p class="text-gray-600">The red Teletubby who loves his trolley!</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+            <div class="w-24 h-24 mx-auto rounded-full bg-green-200 mb-4 flex items-center justify-center">
+              <span class="text-4xl">🌿</span>
+            </div>
+            <h3 class="text-xl font-bold text-green-600 mb-2">Dipsy</h3>
+            <p class="text-gray-600">The purple Teletubby with a red handbag!</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+            <div class="w-24 h-24 mx-auto rounded-full bg-pink-200 mb-4 flex items-center justify-center">
+              <span class="text-4xl">💖</span>
+            </div>
+            <h3 class="text-xl font-bold text-pink-600 mb-2">Laa-Laa</h3>
+            <p class="text-gray-600">The yellow Teletubby who loves to dance!</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+            <div class="w-24 h-24 mx-auto rounded-full bg-blue-200 mb-4 flex items-center justify-center">
+              <span class="text-4xl">☁️</span>
+            </div>
+            <h3 class="text-xl font-bold text-blue-600 mb-2">Po</h3>
+            <p class="text-gray-600">The blue Teletubby who loves custard!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+      <div class="container mx-auto px-4 text-center">
+        <h3 class="text-2xl font-bold mb-4">Your Ultimate Teletubbies Fan Hub!</h3>
+        <p class="max-w-2xl mx-auto mb-6">
+          Join our community of Teletubby enthusiasts and explore the magical world of Teletubbyland!
+        </p>
+        <div class="flex justify-center space-x-6">
+          <span class="text-3xl">🌈</span>
+          <span class="text-3xl">🦄</span>
+          <span class="text-3xl">🌟</span>
+          <span class="text-3xl">✨</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>

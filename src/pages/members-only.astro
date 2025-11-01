@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+  { 
+    icon: 'fas fa-paint-brush', 
+    title: 'Exclusive Fan Art Gallery', 
+    description: 'Browse stunning, member-submitted artwork inspired by the Teletubbies\' colorful adventures. From pastel sketches of Baby Sun to vibrant scenes in Teletubbyland'
+  },
+  { 
+    icon: 'fas fa-video', 
+    title: 'Behind-the-Scenes Content', 
+    description: 'Access exclusive videos, interviews, and never-before-seen moments from the Teletubbies universe'
+  },
+  { 
+    icon: 'fas fa-gift', 
+    title: 'Special Member Perks', 
+    description: 'Get early access to new merchandise, exclusive collectibles, and special discounts on Teletubby products'
+  },
+  { 
+    icon: 'fas fa-users', 
+    title: 'Community Forums', 
+    description: 'Connect with fellow Teletubbies enthusiasts in our vibrant, moderated online community'
+  }
+];
+
+const testimonials = [
+  { 
+    name: 'Tinky Winky Fan', 
+    text: 'This lounge is absolutely magical! I love sharing my artwork here and discovering new fan creations.' 
+  },
+  { 
+    name: 'Dipsy Lover', 
+    text: 'The exclusive content here makes me feel like I\'m part of the Teletubbies world! So much fun!' 
+  },
+  { 
+    name: 'Laa-Laa Appreciator', 
+    text: 'The community here is the most welcoming place for Teletubbies fans. I\'ve made so many friends!' 
+  }
+];
+
+const content = `
+  <div class="bg-white rounded-2xl p-6 shadow-lg border-4 border-accent mb-8">
+    <h2 class="text-3xl font-bold text-primary mb-4">🌈 Welcome, Esteemed Teletubby Troupe Member! 🌈</h2>
+    <p class="text-lg mb-4">Oh no, it's the VIP zone!* You've unlocked the secret garden of Teletubby Troupe Central, where the sun shines brighter and the Tubby custard flows endlessly. As a dedicated fan, you're now part of our inner circle – the ultimate hub for all things Teletubbies!</p>
+    <p class="text-lg">Here in this members-only lounge, we celebrate the joyful chaos of Tinky Winky, Dipsy, Laa-Laa, and Po with <strong>exclusive treats</strong> that non-members can only dream of. Get ready to tubby your way through special content and community bonding!</p>
+  </div>
+
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-primary mb-6 text-center">🎉 What Awaits You in Our Whimsical Wonderland? 🎉</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-gradient-to-br from-pink-100 to-yellow-100 p-6 rounded-2xl border-4 border-pink-300">
+        <h3 class="text-2xl font-bold text-primary mb-3">Exclusive Fan Art Gallery</h3>
+        <p class="mb-4">Browse stunning, member-submitted artwork inspired by the Teletubbies' colorful adventures. From pastel sketches of Baby Sun to vibrant scenes in Teletubbyland</p>
+        <div class="flex justify-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-400 to-yellow-400 flex items-center justify-center">
+            <i class="fas fa-paint-brush text-white text-2xl"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gradient-to-br from-blue-100 to-green-100 p-6 rounded-2xl border-4 border-blue-300">
+        <h3 class="text-2xl font-bold text-primary mb-3">Behind-the-Scenes Content</h3>
+        <p class="mb-4">Access exclusive videos, interviews, and never-before-seen moments from the Teletubbies universe. See the magic happen behind the scenes!</p>
+        <div class="flex justify-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-green-400 flex items-center justify-center">
+            <i class="fas fa-video text-white text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+const title = "Welcome to the Exclusive Teletubby Troupe Members-Only Lounge!";
+const description = "Dive into a whimsical world of Teletubbies magic reserved just for you! Access exclusive fan content, behind-the-scenes fun, and special perks in our playful pastel paradise.";
+---
+
+<Layout title={title} description={description}>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-pink-200 via-yellow-200 to-green-200 opacity-70"></div>
+    <div class="absolute top-0 left-0 w-full h-full">
+      <div class="absolute top-10 left-10 w-32 h-32 rounded-full bg-yellow-300 opacity-30 animate-pulse"></div>
+      <div class="absolute top-40 right-20 w-24 h-24 rounded-full bg-pink-300 opacity-40 animate-bounce"></div>
+      <div class="absolute bottom-20 left-1/4 w-40 h-40 rounded-full bg-green-300 opacity-30 animate-pulse"></div>
+    </div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-bold text-primary mb-6 leading-tight">
+          <span class="inline-block transform rotate-3">W</span>
+          <span class="inline-block transform -rotate-1">e</span>
+          <span class="inline-block transform rotate-2">l</span>
+          <span class="inline-block transform -rotate-1">c</span>
+          <span class="inline-block transform rotate-1">o</span>
+          <span class="inline-block transform -rotate-1">m</span>
+          <span class="inline-block transform rotate-2">e</span>
+          <span class="inline-block ml-2">to</span>
+          <span class="block text-accent">The</span>
+          <span class="block text-yellow-500">Members-Only</span>
+          <span class="block text-pink-500">Lounge</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-primary font-light mb-10">
+          Dive into a whimsical world of Teletubbies magic reserved just for you!
+        </p>
+        <div class="flex justify-center">
+          <div class="bg-gradient-to-r from-pink-400 to-yellow-400 px-8 py-4 rounded-full text-white font-bold text-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <i class="fas fa-star mr-2"></i> Join Our Inner Circle Now!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section class="py-16 bg-gradient-to-b from-white to-pink-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-pink-100 to-yellow-100 rounded-3xl p-8 md:p-12 shadow-xl border-8 border-pink-200">
+          <div class="flex items-center mb-6">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-pink-400 flex items-center justify-center mr-4">
+              <i class="fas fa-crown text-white text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-primary">Welcome, Esteemed Member!</h2>
+          </div>
+          <p class="text-lg mb-6">
+            Oh no, it's the VIP zone!* You've unlocked the secret garden of Teletubby Troupe Central, where the sun shines brighter and the Tubby custard flows endlessly. As a dedicated fan, you're now part of our inner circle – the ultimate hub for all things Teletubbies!
+          </p>
+          <p class="text-lg">
+            Here in this members-only lounge, we celebrate the joyful chaos of Tinky Winky, Dipsy, Laa-Laa, and Po with <strong>exclusive treats</strong> that non-members can only dream of. Get ready to tubby your way through special content and community bonding!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="py-16 bg-gradient-to-b from-pink-50 to-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-primary mb-4">What Makes Our Lounge Special</h2>
+      <p class="text-xl text-center text-accent mb-12 max-w-2xl mx-auto">Exclusive perks just for our most loyal Teletubbies fans</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {features.map((feature, index) => (
+          <div 
+            key={index} 
+            class="bg-white rounded-2xl p-6 shadow-lg border-4 border-accent transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
+          >
+            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-400 to-yellow-400 flex items-center justify-center mb-6">
+              <i class={`${feature.icon} text-white text-2xl`}></i>
+            </div>
+            <h3 class="text-xl font-bold text-primary mb-3">{feature.title}</h3>
+            <p class="text-gray-700">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-pink-400 to-yellow-400">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">Ready to Tubby Your Way?</h2>
+      <p class="text-xl text-white mb-10 max-w-2xl mx-auto">
+        Join thousands of other dedicated Teletubbies fans in our playful pastel paradise!
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <button class="bg-white text-pink-500 font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <i class="fas fa-user-plus mr-2"></i> Become a Member
+        </button>
+        <button class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <i class="fas fa-rocket mr-2"></i> Explore Now
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 bg-gradient-to-b from-white to-pink-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-primary mb-4">What Our Members Say</h2>
+      <p class="text-xl text-center text-accent mb-12 max-w-2xl mx-auto">Hear from our community of passionate Teletubbies fans</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {testimonials.map((testimonial, index) => (
+          <div 
+            key={index} 
+            class="bg-gradient-to-br from-white to-pink-50 rounded-2xl p-8 shadow-lg border-4 border-pink-200"
+          >
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-pink-400 flex items-center justify-center mr-4">
+                <i class="fas fa-user text-white"></i>
+              </div>
+              <h3 class="font-bold text-primary">{testimonial.name}</h3>
+            </div>
+            <p class="text-gray-700 italic">"{testimonial.text}"</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="py-16 bg-gradient-to-r from-green-400 to-blue-400">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">Your Ultimate Teletubbies Fan Hub!</h2>
+      <p class="text-xl text-white mb-10 max-w-2xl mx-auto">
+        Whether you're a Tinky Winky lover or a Dipsy enthusiast, our inclusive community celebrates all things Teletubbies.
+      </p>
+      <div class="inline-block bg-white text-blue-500 font-bold py-4 px-10 rounded-full text-lg shadow-lg">
+        <i class="fas fa-heart mr-2 text-pink-500"></i> Join Our Whimsical Wonderland Today!
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple animation for feature cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.rounded-2xl');
+      cards.forEach((card, index) => {
+        card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s forwards`;
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+      });
+    });
+  </script>
+  
+  <style>
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</Layout>

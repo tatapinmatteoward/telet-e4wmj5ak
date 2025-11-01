@@ -1,0 +1,158 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+      PBN_SITE_ID: ${{ secrets.PBN_SITE_ID }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build Astro site
+        id: build
+        run: npm run build
+      
+      - name: Send build success webhook
+        if: success() && env.WEBHOOK_URL != ''
+        run: |
+          curl -X POST "${{ env.WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d @- <<EOF
+          {
+            "event": "build",
+            "status": "success",
+            "repo_name": "telet-e4wmj5ak",
+            "cloudflare_project_name": "telet-e4wmj5ak",
+            "pbn_site_id": "${{ env.PBN_SITE_ID }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "workflow_run_id": "${{ github.run_id }}",
+            "commit_sha": "${{ github.sha }}",
+            "build_log": {
+              "message": "Build completed successfully",
+              "output": "static",
+              "directory": "dist/"
+            }
+          }
+          EOF
+      
+      - name: Send build failure webhook
+        if: failure() && env.WEBHOOK_URL != ''
+        run: |
+          curl -X POST "${{ env.WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d @- <<EOF
+          {
+            "event": "build",
+            "status": "failure",
+            "repo_name": "telet-e4wmj5ak",
+            "cloudflare_project_name": "telet-e4wmj5ak",
+            "pbn_site_id": "${{ env.PBN_SITE_ID }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "workflow_run_id": "${{ github.run_id }}",
+            "commit_sha": "${{ github.sha }}",
+            "build_log": {
+              "message": "Build failed",
+              "error": "Check workflow logs for details"
+            }
+          }
+          EOF
+      
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        run: |
+          echo "Deploying to Cloudflare Pages..."
+          echo "Project name: telet-e4wmj5ak"
+          
+          # Check if project exists, create if it doesn't
+          if ! npx wrangler pages project list 2>/dev/null | grep -q "telet-e4wmj5ak"; then
+            echo "Creating new Cloudflare Pages project: telet-e4wmj5ak"
+            CREATE_OUTPUT=$(npx wrangler pages project create telet-e4wmj5ak --production-branch=main 2>&1)
+            echo "$CREATE_OUTPUT"
+            echo "$CREATE_OUTPUT" > /tmp/create_output.txt
+          else
+            echo "Project telet-e4wmj5ak already exists"
+          fi
+          
+          # Deploy to Cloudflare Pages and capture output
+          DEPLOY_OUTPUT=$(npx wrangler pages deploy dist --project-name=telet-e4wmj5ak --branch=main 2>&1)
+          echo "$DEPLOY_OUTPUT"
+          echo "$DEPLOY_OUTPUT" > /tmp/deploy_output.txt
+          
+          # Extract deployment URL from output (matches any Cloudflare Pages URL)
+          DEPLOYMENT_URL=$(echo "$DEPLOY_OUTPUT" | grep -oP 'https://[a-z0-9]+\.[a-z0-9-]+\.pages\.dev' | tail -1)
+          echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+      
+      - name: Send Cloudflare deployment success webhook
+        if: success() && env.WEBHOOK_URL != ''
+        run: |
+          # Read deployment output
+          DEPLOY_LOG=$(cat /tmp/deploy_output.txt 2>/dev/null || echo "No deployment log available")
+          
+          curl -X POST "${{ env.WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d @- <<EOF
+          {
+            "event": "cloudflare",
+            "status": "success",
+            "repo_name": "telet-e4wmj5ak",
+            "cloudflare_project_name": "telet-e4wmj5ak",
+            "pbn_site_id": "${{ env.PBN_SITE_ID }}",
+            "cloudflare_dev_site": "https://telet-e4wmj5ak.pages.dev",
+            "cloudflare_deployed_site": "${{ steps.deploy.outputs.DEPLOYMENT_URL }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "workflow_run_id": "${{ github.run_id }}",
+            "commit_sha": "${{ github.sha }}",
+            "deployment_log": {
+              "message": "Deployment completed successfully",
+              "output": $(echo "$DEPLOY_LOG" | jq -Rs .)
+            }
+          }
+          EOF
+      
+      - name: Send Cloudflare deployment failure webhook
+        if: failure() && env.WEBHOOK_URL != ''
+        run: |
+          # Read deployment output if available
+          DEPLOY_LOG=$(cat /tmp/deploy_output.txt 2>/dev/null || echo "No deployment log available")
+          
+          curl -X POST "${{ env.WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d @- <<EOF
+          {
+            "event": "cloudflare",
+            "status": "failure",
+            "repo_name": "telet-e4wmj5ak",
+            "cloudflare_project_name": "telet-e4wmj5ak",
+            "pbn_site_id": "${{ env.PBN_SITE_ID }}",
+            "cloudflare_dev_site": "https://telet-e4wmj5ak.pages.dev",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "workflow_run_id": "${{ github.run_id }}",
+            "commit_sha": "${{ github.sha }}",
+            "deployment_log": {
+              "message": "Deployment failed",
+              "error": $(echo "$DEPLOY_LOG" | jq -Rs .)
+            }
+          }
+          EOF

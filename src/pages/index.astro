@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+  {
+    icon: 'fas fa-star',
+    title: 'Nostalgic Episodes & Clips',
+    text: 'Relive classic moments with high-quality streams and downloads. Remember the Baby Sun\'s smile?'
+  },
+  {
+    icon: 'fas fa-paint-brush',
+    title: 'Fan Art Gallery',
+    text: 'Showcase your creative masterpieces or browse adorable drawings from fellow enthusiasts.'
+  },
+  {
+    icon: 'fas fa-comments',
+    title: 'Community Forum',
+    text: 'Chat with Tubby lovers worldwide—share theories about the Noo-Noo or plan watch parties!'
+  },
+  {
+    icon: 'fas fa-shopping-bag',
+    title: 'Merch & Collectibles',
+    text: 'Hunt for rare goodies, from Tubby Custard m'
+  }
+];
+
+const teasers = [
+  { 
+    title: 'Tinky Winky\'s Rainbow Adventures',
+    description: 'Join Tinky in his quest for the perfect rainbow'
+  },
+  { 
+    title: 'Dipsy\'s Discovery Mission',
+    description: 'Follow Dipsy as he explores the wonders of Teletubbyland'
+  },
+  { 
+    title: 'Laa-Laa\'s Dance Party',
+    description: 'Experience the joy of Laa-Laa\'s infectious dance moves'
+  },
+  { 
+    title: 'Po\'s Morning Ritual',
+    description: 'Start your day with Po\'s cheerful morning routine'
+  }
+];
+---
+
+<Layout title="Welcome to Teletubby Troupe Central" description="Dive into the colorful world of Teletubbies with our ultimate fan hub, featuring fun content, community, and nostalgic delights in a whimsical pastel playground.">
+  <!-- Hero Section with Playful Gradient -->
+  <section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#ff7f50]/10 to-[#98fb98]/10"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-block bg-[#ff7f50]/20 rounded-full px-6 py-2 mb-6 animate-bounce">
+          <span class="text-[#ff7f50] font-bold">🌟 NEW CONTENT ALERT! 🌟</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-[#ff7f50] drop-shadow-lg">
+          Welcome to <span class="text-[#98fb98]">Teletubby</span> Troupe Central
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
+          Your Ultimate Teletubbies Fan Hub!
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button class="bg-[#ff7f50] hover:bg-[#ff6b3a] text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+            Join the Fun!
+          </button>
+          <button class="bg-[#98fb98] hover:bg-[#8fe08f] text-[#ff7f50] font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+            Explore Troupe
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gradient-to-b from-white to-[#ff7f50]/5">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-[#ff7f50] mb-4">Why Join the Troupe?</h2>
+        <div class="w-24 h-1 bg-[#98fb98] mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {features.map((feature, index) => (
+          <div 
+            class="bg-white rounded-2xl shadow-xl p-6 transform hover:-translate-y-2 transition-all duration-300 border-2 border-[#ff7f50]/20 hover:border-[#ff7f50]/50"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <div class="w-16 h-16 rounded-full bg-[#ff7f50]/10 flex items-center justify-center mb-6">
+              <i class={`${feature.icon} text-2xl text-[#ff7f50]`}></i>
+            </div>
+            <h3 class="text-xl font-bold text-[#ff7f50] mb-3">{feature.title}</h3>
+            <p class="text-gray-600 leading-relaxed">{feature.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser Section -->
+  <section class="py-20 bg-gradient-to-b from-[#ff7f50]/5 to-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-[#98fb98] mb-4">Tubby Tales</h2>
+        <p class="text-xl text-gray-700 max-w-2xl mx-auto">Dive into the most beloved moments from the Teletubby world</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        {teasers.map((teaser, index) => (
+          <div 
+            class="relative bg-white rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+            key={index}
+          >
+            <div class="absolute inset-0 bg-gradient-to-r from-[#ff7f50]/20 to-[#98fb98]/20"></div>
+            <div class="relative p-8 h-full flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-full bg-[#98fb98] flex items-center justify-center mb-4">
+                  <span class="text-[#ff7f50] font-bold text-xl">{index + 1}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-[#ff7f50] mb-3">{teaser.title}</h3>
+                <p class="text-gray-600 text-lg">{teaser.description}</p>
+              </div>
+              <div class="mt-6">
+                <button class="text-[#98fb98] font-bold flex items-center group">
+                  Read More
+                  <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Community Section -->
+  <section class="py-20 bg-gradient-to-r from-[#ff7f50]/10 to-[#98fb98]/10">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-[#ff7f50] mb-6">Join Our Whimsical Community</h2>
+        <p class="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
+          Connect with fellow Teletubbies enthusiasts from around the world!
+        </p>
+        
+        <div class="bg-white rounded-3xl shadow-2xl p-8 mb-12">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex-1 text-left">
+              <h3 class="text-2xl font-bold text-[#98fb98] mb-2">Community Features</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-center">
+                  <div class="w-5 h-5 rounded-full bg-[#ff7f50] mr-3"></div>
+                  <span>Discussion forums for all Tubby topics</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-5 h-5 rounded-full bg-[#ff7f50] mr-3"></div>
+                  <span>Weekly watch parties</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-5 h-5 rounded-full bg-[#ff7f50] mr-3"></div>
+                  <span>Monthly fan art contests</span>
+                </li>
+              </ul>
+            </div>
+            <button class="bg-[#98fb98] hover:bg-[#8fe08f] text-[#ff7f50] font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 whitespace-nowrap">
+              Become a Troupe Member
+            </button>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+          <div class="bg-[#ff7f50]/10 rounded-xl p-4">
+            <div class="text-4xl text-[#ff7f50] mb-2">💬</div>
+            <div class="text-lg font-bold text-[#ff7f50]">1,248</div>
+            <div class="text-gray-600">Active Members</div>
+          </div>
+          <div class="bg-[#98fb98]/10 rounded-xl p-4">
+            <div class="text-4xl text-[#98fb98] mb-2">🎨</div>
+            <div class="text-lg font-bold text-[#98fb98]">324</div>
+            <div class="text-gray-600">Art Submissions</div>
+          </div>
+          <div class="bg-[#ff7f50]/10 rounded-xl p-4">
+            <div class="text-4xl text-[#ff7f50] mb-2">🌟</div>
+            <div class="text-lg font-bold text-[#ff7f50]">87</div>
+            <div class="text-gray-600">Community Stars</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="py-20 bg-gradient-to-r from-[#ff7f50] to-[#98fb98]">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white mb-6">Ready for a Tubby Adventure?</h2>
+      <p class="text-xl text-white mb-10 max-w-2xl mx-auto">
+        Join our whimsical community and discover the magic of Teletubby Troupe Central
+      </p>
+      <button class="bg-white text-[#ff7f50] hover:bg-gray-100 font-bold py-4 px-12 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+        Start Your Journey Today!
+      </button>
+    </div>
+  </section>
+</Layout>

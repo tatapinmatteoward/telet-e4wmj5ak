@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const plushies = [
+  { 
+    name: "Tinky Winky Plush", 
+    description: "The purple leader of fun, 12 inches of squishy delight!",
+    color: "bg-purple-300"
+  },
+  { 
+    name: "Dipsy Hat-Wearer", 
+    description: "Green and groovy, complete with his signature hat.",
+    color: "bg-green-300"
+  },
+  { 
+    name: "Laa-Laa Ball Buddy", 
+    description: "Yellow sunshine with a bouncy ball accessory.",
+    color: "bg-yellow-300"
+  },
+  { 
+    name: "Po Scooter Star", 
+    description: "Red and ready for speedy adventures.",
+    color: "bg-red-300"
+  }
+];
+
+const apparel = [
+  { 
+    name: "Tubby Custard T-Shirt", 
+    description: "Soft cotton with playful tubby designs",
+    color: "bg-pink-200"
+  },
+  { 
+    name: "Rainbow Socks Set", 
+    description: "Colorful socks for your daily adventures",
+    color: "bg-blue-200"
+  },
+  { 
+    name: "Teletubby Hat", 
+    description: "Complete with Tinky Winky's signature bow",
+    color: "bg-yellow-200"
+  }
+];
+
+const accessories = [
+  { 
+    name: "Tubby Backpack", 
+    description: "Perfect for carrying your treasures",
+    color: "bg-purple-200"
+  },
+  { 
+    name: "Teletubby Keychain", 
+    description: "Small but mighty, keeps your keys safe",
+    color: "bg-green-200"
+  },
+  { 
+    name: "Plushie Holder", 
+    description: "Keeps your favorite plushies visible",
+    color: "bg-pink-300"
+  }
+];
+---
+
+<Layout title="Teletubby Merchandise Wonderland" description="Step into a playful paradise of Teletubbies treasures! Explore our whimsical collection of plushies, apparel, and accessories designed to bring Tellyland magic into your everyday adventures. Perfect for fans of all ages!">
+  <!-- Hero Section -->
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#ff7f50]/10 to-[#98fb98]/10 z-0"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-6xl font-bold text-[#ff7f50] mb-4">
+            Teletubby Merchandise Wonderland
+          </h1>
+          <p class="text-xl md:text-2xl text-[#98fb98] mb-6">
+            Your Ultimate Teletubbies Fan Hub!
+          </p>
+          <p class="text-lg text-gray-700 max-w-lg">
+            Step into a playful paradise of Teletubbies treasures! Explore our whimsical collection of plushies, apparel, and accessories designed to bring Tellyland magic into your everyday adventures.
+          </p>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative">
+            <div class="w-64 h-64 md:w-80 md:h-80 bg-[#ff7f50]/20 rounded-full flex items-center justify-center">
+              <div class="w-48 h-48 md:w-60 md:h-60 bg-[#98fb98]/20 rounded-full flex items-center justify-center">
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <div class="text-5xl">🌈</div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center animate-bounce">
+              <div class="text-2xl">🧸</div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-green-300 rounded-full flex items-center justify-center animate-bounce delay-100">
+              <div class="text-2xl">👕</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plushies Section -->
+  <section class="py-16 bg-gradient-to-b from-white to-[#f0f8ff]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Plushie Pals 🧸</h2>
+        <p class="text-xl text-[#98fb98] max-w-2xl mx-auto">
+          Snuggle up with our soft, huggable friends that bring the magic of Tellyland to life!
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {plushies.map((plushie, index) => (
+          <div 
+            key={index} 
+            class={`${plushie.color} rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
+          >
+            <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4">
+              <div class="text-4xl">🧸</div>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">{plushie.name}</h3>
+            <p class="text-gray-700 text-center">{plushie.description}</p>
+            <div class="mt-4 flex justify-center">
+              <button class="bg-[#ff7f50] hover:bg-[#ff5e33] text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Apparel Section -->
+  <section class="py-16 bg-gradient-to-b from-[#f0f8ff] to-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Apparel Adventures 👕</h2>
+        <p class="text-xl text-[#98fb98] max-w-2xl mx-auto">
+          Dress up in the colors and fun of Tellyland with our adorable clothing collection!
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {apparel.map((item, index) => (
+          <div 
+            key={index} 
+            class={`${item.color} rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
+          >
+            <div class="bg-white rounded-lg w-32 h-32 flex items-center justify-center mx-auto mb-4">
+              <div class="text-5xl">👕</div>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">{item.name}</h3>
+            <p class="text-gray-700 text-center">{item.description}</p>
+            <div class="mt-4 flex justify-center">
+              <button class="bg-[#98fb98] hover:bg-[#7cd97c] text-[#ff7f50] font-bold py-2 px-4 rounded-full transition-colors duration-300">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Accessories Section -->
+  <section class="py-16 bg-gradient-to-b from-white to-[#f0f8ff]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Accessories & More 🎒</h2>
+        <p class="text-xl text-[#98fb98] max-w-2xl mx-auto">
+          Complete your Teletubbies collection with magical accessories that bring joy to every day!
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {accessories.map((item, index) => (
+          <div 
+            key={index} 
+            class={`${item.color} rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
+          >
+            <div class="bg-white rounded-lg w-32 h-32 flex items-center justify-center mx-auto mb-4">
+              <div class="text-5xl">🎒</div>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">{item.name}</h3>
+            <p class="text-gray-700 text-center">{item.description}</p>
+            <div class="mt-4 flex justify-center">
+              <button class="bg-[#ff7f50] hover:bg-[#ff5e33] text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-[#ff7f50]/20 to-[#98fb98]/20">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Ready for Your Tellyland Adventure?</h2>
+      <p class="text-xl text-[#98fb98] mb-8 max-w-2xl mx-auto">
+        Join thousands of fans who have brought the magic of Tellyland into their everyday lives!
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <button class="bg-[#ff7f50] hover:bg-[#ff5e33] text-white font-bold py-3 px-8 rounded-full text-lg transition-colors duration-300 transform hover:scale-105">
+          Shop All Merchandise
+        </button>
+        <button class="bg-[#98fb98] hover:bg-[#7cd97c] text-[#ff7f50] font-bold py-3 px-8 rounded-full text-lg transition-colors duration-300 transform hover:scale-105">
+          View Gift Guides
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Info -->
+  <section class="py-8 bg-[#ff7f50] text-white">
+    <div class="container mx-auto px-4 text-center">
+      <p class="mb-2">Made with ❤️ for all Teletubbies fans</p>
+      <p>Teletubby Troupe Central • Bringing joy to Tellyland since 2023</p>
+    </div>
+  </section>
+</Layout>

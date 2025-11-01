@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const featuredArt = [
+  {
+    title: "Tinky Winky's Grand Adventure",
+    artist: "TubbyFan42",
+    description: "A bold purple handbag swing under rainbow skies.",
+    image: "images/tinky-winky-fanart.jpg"
+  },
+  {
+    title: "Dipsy's Groovy Dance",
+    artist: "DanceWithDipsy",
+    description: "Spinning in the sunshine with joyous abandon.",
+    image: "images/dipsy-dance.jpg"
+  },
+  {
+    title: "Laa-Laa's Colorful Dream",
+    artist: "DreamyLaaLaa",
+    description: "Floating through a cotton candy sky with friends.",
+    image: "images/laa-laa-dream.jpg"
+  },
+  {
+    title: "Po's Rainbow Noodle",
+    artist: "PoNoodleFan",
+    description: "A whimsical noodle adventure through pastel clouds.",
+    image: "images/po-noodle.jpg"
+  }
+];
+
+const collections = [
+  { 
+    title: "Official Teletubbies",
+    count: "42 images",
+    color: "bg-pink-200"
+  },
+  { 
+    title: "Fan Art Showcase",
+    count: "78 pieces",
+    color: "bg-blue-200"
+  },
+  { 
+    title: "Silly Moments",
+    count: "31 clips",
+    color: "bg-yellow-200"
+  },
+  { 
+    title: "The Tubby Diaries",
+    count: "26 entries",
+    color: "bg-green-200"
+  }
+];
+
+const tagline = "Your Ultimate Teletubbies Fan Hub!";
+const title = "Gallery - Teletubby Troupe Central";
+const description = "Dive into a colorful collection of Teletubbies fan art, official images, and playful moments from the whimsical world of Tinky Winky, Dipsy, Laa-Laa, and Po. Explore, share, and celebrate your favorite tubby moments!";
+---
+
+<Layout title={title} description={description}>
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#ff7f50] to-[#98fb98] opacity-20"></div>
+    <div class="relative container mx-auto px-4 py-20 md:py-32">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-[#ff7f50] mb-4 animate-bounce">
+          Teletubby Gallery
+        </h1>
+        <div class="h-1 w-32 bg-[#98fb98] mx-auto mb-6 rounded-full"></div>
+        <p class="text-xl md:text-2xl text-[#ff7f50] mb-8">
+          {tagline}
+        </p>
+        <p class="text-lg text-[#4b4b4b] max-w-2xl mx-auto">
+          Dive into a colorful collection of Teletubbies fan art, official images, and playful moments from the whimsical world of Tinky Winky, Dipsy, Laa-Laa, and Po. Explore, share, and celebrate your favorite tubby moments!
+        </p>
+        <div class="mt-10">
+          <button class="bg-[#ff7f50] hover:bg-[#ff6b3a] text-white font-bold py-3 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg">
+            Explore the Gallery
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Section -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Featured Fan Art</h2>
+      <div class="h-1 w-24 bg-[#98fb98] mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {featuredArt.map((art, index) => (
+        <div 
+          class="bg-white rounded-2xl overflow-hidden shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl"
+          style="animation-delay: ${index * 100}ms;"
+        >
+          <div class="h-48 bg-gradient-to-r from-[#ff7f50] to-[#98fb98] flex items-center justify-center">
+            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-[#ff7f50] mb-2">{art.title}</h3>
+            <p class="text-[#4b4b4b] mb-3">{art.description}</p>
+            <p class="text-sm text-[#98fb98] font-semibold">by {art.artist}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Collections Section -->
+  <section class="py-16 bg-gradient-to-br from-[#fff5f0] to-[#f0fff5]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#ff7f50] mb-4">Explore the Collections</h2>
+        <div class="h-1 w-24 bg-[#98fb98] mx-auto rounded-full"></div>
+        <p class="mt-6 text-lg text-[#4b4b4b] max-w-2xl mx-auto">
+          Browse our curated collections of Teletubbies memories and creations
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {collections.map((collection) => (
+          <div class={`rounded-2xl p-6 text-center ${collection.color} shadow-lg transform transition-all hover:scale-105`}>
+            <div class="text-4xl mb-4">🎨</div>
+            <h3 class="text-xl font-bold text-[#ff7f50] mb-2">{collection.title}</h3>
+            <p class="text-[#4b4b4b]">{collection.count}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12">
+      <div class="flex items-start mb-8">
+        <div class="bg-[#ff7f50] text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 flex-shrink-0">
+          <i class="fas fa-star"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-[#ff7f50]">Teletubby Gallery: A World of Whimsy Awaits!</h2>
+      </div>
+      
+      <p class="text-lg text-[#4b4b4b] mb-6">
+        Welcome to the heart of <span class="font-bold text-[#ff7f50]">Teletubby Troupe Central</span>'s gallery, where pastel dreams come alive! 
+        This enchanting space is bursting with vibrant images, fan creations, and nostalgic snapshots from the sunny hills of Teletubbyland. 
+        Whether you're a longtime fan or a new admirer, let these playful visuals transport you to a world of giggles and cuddles.
+      </p>
+      
+      <div class="bg-gradient-to-r from-[#ff7f50] to-[#98fb98] p-1 rounded-lg mb-8">
+        <div class="bg-white rounded-lg p-6">
+          <h3 class="text-xl font-bold text-[#ff7f50] mb-3">Browse our curated collections below</h3>
+          <p class="text-[#4b4b4b] mb-4">
+            From official imagery to whimsical fan art, our curated collections showcase the best of the Teletubby universe. 
+            Each piece tells a story of joy, friendship, and playful exploration.
+          </p>
+          <p class="text-[#4b4b4b]">
+            Don't forget to <span class="font-bold">submit your own artwork</span> for a chance to be featured! 
+            Join our community of tubby enthusiasts and share your creativity with fellow fans.
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-10">
+        <button class="bg-gradient-to-r from-[#ff7f50] to-[#98fb98] text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg transform transition-all hover:scale-105">
+          Submit Your Artwork
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="py-16 bg-gradient-to-r from-[#ff7f50] to-[#98fb98] text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Join the Teletubby Community</h2>
+      <p class="text-xl max-w-2xl mx-auto mb-8">
+        Be part of the most whimsical fan hub on the internet. Share your stories, connect with others, and celebrate the joy of Tinky Winky, Dipsy, Laa-Laa, and Po!
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <button class="bg-white text-[#ff7f50] font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition">
+          Join Our Group
+        </button>
+        <button class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white/10 transition">
+          Share Your Story
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>
